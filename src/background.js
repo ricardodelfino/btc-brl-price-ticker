@@ -51,11 +51,11 @@ function updateUISuccess(currentPrice, yesterdayPrice) {
   chrome.action.setBadgeBackgroundColor({ color: '#000000' });
 
   // Build the tooltip string.
-  let title = `Bitcoin Price Now: ${formatPrice(currentPrice)}`;
+  let title = chrome.i18n.getMessage('tooltipNow', formatPrice(currentPrice));
   if (yesterdayPrice !== null) {
     const variation = ((currentPrice - yesterdayPrice) / yesterdayPrice) * 100;
-    title += `\nYesterday: ${formatPrice(yesterdayPrice)}`;
-    title += `\nVariation: ${formatVariation(variation)}`;
+    title += `\n${chrome.i18n.getMessage('tooltipYesterday', formatPrice(yesterdayPrice))}`;
+    title += `\n${chrome.i18n.getMessage('tooltipVariation', formatVariation(variation))}`;
   }
   chrome.action.setTitle({ title });
 }
@@ -67,7 +67,7 @@ function updateUISuccess(currentPrice, yesterdayPrice) {
 function updateUIError() {
   chrome.action.setBadgeText({ text: 'N/A' });
   chrome.action.setBadgeBackgroundColor({ color: '#FF0000' }); // Red color for error
-  chrome.action.setTitle({ title: 'Could not fetch BTC price. Check your connection or API status.' });
+  chrome.action.setTitle({ title: chrome.i18n.getMessage('tooltipError') });
 }
 
 /**

@@ -1,0 +1,18 @@
+{
+  "extName": {
+    "message": "Preço do Bitcoin em Real Brasileiro"
+  },
+  "extDescription": {
+    "message": "Exibe o preço atual do Bitcoin (BTC) em Real Brasileiro (BRL) na barra de ferramentas do navegador."
+  },
+  "tooltipNow": {
+    "message": "Bitcoin: $price$",
+    "placeholders": { "price": { "content": "$1" } }
+  },
+  "tooltipYesterday": {
+    "message": "Ontem: $price$",
+    "placeholders": { "price": { "content": "$1" } }
+  },
+  "tooltipVariation": { "message": "Variação: $variation$", "placeholders": { "variation": { "content": "$1" } } },
+  "tooltipError": { "message": "Não foi possível buscar o preço do BTC. Verifique sua conexão ou o status da API." }
+}

@@ -6,7 +6,7 @@
  * @returns {string} The formatted price string.
  */
 export function formatPrice(price) {
-  return new Intl.NumberFormat('pt-BR', {
+  return new Intl.NumberFormat(undefined, { // Use browser's locale
     style: 'currency',
     currency: 'BRL',
     maximumFractionDigits: 0,

@@ -1,0 +1,18 @@
+{
+  "extName": {
+    "message": "Bitcoin Price Ticker in Brazilian Real"
+  },
+  "extDescription": {
+    "message": "Displays the current Bitcoin (BTC) price in Brazilian Real (BRL) on the browser toolbar."
+  },
+  "tooltipNow": {
+    "message": "Bitcoin now: $price$",
+    "placeholders": { "price": { "content": "$1" } }
+  },
+  "tooltipYesterday": {
+    "message": "Yesterday: $price$",
+    "placeholders": { "price": { "content": "$1" } }
+  },
+  "tooltipVariation": { "message": "Variation: $variation$", "placeholders": { "variation": { "content": "$1" } } },
+  "tooltipError": { "message": "Could not fetch BTC price. Check your connection or API status." }
+}
