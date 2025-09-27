@@ -1,19 +1,18 @@
 # BTC BRL Price Ticker
 
 [![GitHub stars](https://img.shields.io/github/stars/ricardodelfino/btc-brl-price-ticker?style=social)](https://github.com/ricardodelfino/btc-brl-price-ticker/stargazers)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/EXTENSION_ID?label=Chrome%20Web%20Store&color=blue)](https://chrome.google.com/webstore/detail/EXTENSION_ID)
-[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/EXTENSION_ID?label=users)](https://chrome.google.com/webstore/detail/EXTENSION_ID)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/acdibmngomngfmgjkghpebfndbhmeabb?label=Chrome%20Web%20Store&color=blue)](https://chrome.google.com/webstore/detail/acdibmngomngfmgjkghpebfndbhmeabb)
+[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/acdibmngomngfmgjkghpebfndbhmeabb?label=users)](https://chrome.google.com/webstore/detail/acdibmngomngfmgjkghpebfndbhmeabb)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A simple, lightweight, and reliable Chrome extension that displays the current price of Bitcoin (BTC) in Brazilian Real (BRL) directly on your browser's toolbar.
 
-<!-- Replace with a real screenshot URL -->
-![Extension Screenshot](https://via.placeholder.com/600x400.png?text=Extension+Screenshot+Here)
+![Demonstração da Extensão](assets/how-to-use-extension-chrome-btc-brl.png)
 
 ## Features
 
 -   **Real-Time Price:** Get the BTC/BRL price updated every 60 seconds.
--   **Quick View Badge:** The extension icon shows a compact price (e.g., `350k`, `1.2m`).
+-   **Quick View Badge:** The extension icon shows a compact price (e.g., `588k`, `1.2m`).
 -   **Detailed Tooltip:** Hover over the icon to see:
     -   The current price in BRL.
     -   The price from exactly 24 hours ago.
@@ -26,7 +25,7 @@ A simple, lightweight, and reliable Chrome extension that displays the current p
 
 ### From the Chrome Web Store (Recommended)
 
-1.  Visit the BTC BRL Price Ticker page on the Chrome Web Store. <!-- Replace EXTENSION_ID -->
+1.  Visit the BTC BRL Price Ticker page on the [Chrome Web Store](https://chrome.google.com/webstore/detail/acdibmngomngfmgjkghpebfndbhmeabb).
 2.  Click "Add to Chrome".
 3.  Pin the extension to your toolbar for easy access!
 
