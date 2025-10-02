@@ -1,13 +1,24 @@
-# BTC BRL Price Ticker
+# Bitcoin Price Ticker (BTC/BRL)
 
-[![GitHub stars](https://img.shields.io/github/stars/ricardodelfino/btc-brl-price-ticker?style=social)](https://github.com/ricardodelfino/btc-brl-price-ticker/stargazers)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/acdibmngomngfmgjkghpebfndbhmeabb?label=Chrome%20Web%20Store&color=blue)](https://chrome.google.com/webstore/detail/acdibmngomngfmgjkghpebfndbhmeabb)
 [![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/acdibmngomngfmgjkghpebfndbhmeabb?label=users)](https://chrome.google.com/webstore/detail/acdibmngomngfmgjkghpebfndbhmeabb)
+[![Chrome Web Store Rating](https://img.shields.io/chrome-web-store/rating/acdibmngomngfmgjkghpebfndbhmeabb?label=rating)](https://chrome.google.com/webstore/detail/acdibmngomngfmgjkghpebfndbhmeabb)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A simple, lightweight, and reliable Chrome extension that displays the current price of Bitcoin (BTC) in Brazilian Real (BRL) directly on your browser's toolbar.
 
-![Demonstração da Extensão](assets/how-to-use-extension-chrome-btc-brl.png)
+## Extension Preview
+
+<p align="center">
+  <img src="/assets/banner-bitcoin-brazilian-real-price-ticker.png" alt="Bitcoin BRL Ticker Banner" width="348"/>
+</p>
+<p align="center">
+  &nbsp;&nbsp;    
+  <img src="/assets/how-to-use-extension-chrome-btc-brl-dark.png" alt="BTC/BRL Ticker Dark Mode" width="348"/>
+  &nbsp;&nbsp;
+  <img src="/assets/how-to-use-extension-chrome-btc-brl-light.png" alt="BTC/BRL Ticker Light Mode" width="348"/>
+</p>
+
 
 ## Features
 
