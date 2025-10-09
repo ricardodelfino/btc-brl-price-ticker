@@ -1,0 +1,17 @@
+{
+  "name": "btc-brl-price-ticker",
+  "version": "1.0.2",
+  "description": "Build scripts for the BTC BRL Price Ticker extension",
+  "private": true,
+  "scripts": {
+    "build": "npm run clean && npm run copy && npm run bundle",
+    "clean": "rimraf dist",
+    "copy": "cpx \"{icons/**/*,_locales/**/*,manifest.json,LICENSE}\" dist",
+    "bundle": "esbuild src/background.js --bundle --minify --outfile=dist/src/background.js --format=esm"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "esbuild": "^0.25.10",
+    "rimraf": "^5.0.7"
+  }
+}
