@@ -8,7 +8,7 @@
  */
 export function formatPrice(price) {
   if (price === null || typeof price === 'undefined') return '';
-  return new Intl.NumberFormat('pt-BR', {
+  return new Intl.NumberFormat(undefined, { // Use browser's locale for formatting
     style: 'currency',
     currency: 'BRL',
     minimumFractionDigits: 0,
@@ -25,7 +25,9 @@ export function formatPrice(price) {
 export function formatPriceShort(price) {
   if (price === null || typeof price === 'undefined') return 'N/A';
   if (price >= 1_000_000) {
-    return (price / 1_000_000).toFixed(1) + 'm';
+    // Use Intl.NumberFormat to respect locale's decimal separator (e.g., 1.2m or 1,2m)
+    const value = new Intl.NumberFormat(undefined, { maximumFractionDigits: 1 }).format(price / 1_000_000);
+    return `${value}m`;
   }
   if (price >= 10_000) {
     return Math.round(price / 1000) + 'k';
@@ -43,5 +45,7 @@ export function formatVariation(variation) {
   if (variation === null || typeof variation === 'undefined' || isNaN(variation)) return '';
   const sign = variation >= 0 ? '+' : '';
   const arrow = variation >= 0 ? '▲' : '▼';
-  return `${sign}${variation.toFixed(2)}% ${arrow}`;
+  // Use Intl.NumberFormat to respect locale's decimal separator
+  const formattedVariation = new Intl.NumberFormat(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(variation);
+  return `${sign}${formattedVariation}% ${arrow}`;
 }

@@ -28,9 +28,9 @@ A simple, lightweight, and reliable Chrome extension that displays the current p
 -   **Smart Updates:** Update frequency is reduced when you're idle to save system resources and API calls.
 -   **Detailed Tooltip:** Hover over the icon to see:
     -   The current price in BRL.
-    -   The day's opening price.
-    -   The daily price variation with visual indicators (e.g., `+2.52% ▲`).
--   **Reliable Data:** Uses the Binance API as the primary source and CoinGecko as an automatic fallback for maximum uptime.
+    -   The 24-hour opening price.
+    -   The 24-hour price variation with visual indicators (e.g., `+2.52% ▲`).
+-   **Reliable Data:** Uses the Binance API as the primary source and Bybit as an automatic fallback for maximum uptime.
 -   **Quick Access to Trading:** Click the icon to open the BTC/BRL trading page on Binance.
 -   **Lightweight & Private:** Minimal impact on browser performance. No data collection, no tracking.
 

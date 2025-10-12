@@ -1,18 +1,20 @@
 // src/api.js
 
 /**
- * Fetches the current BTC price in BRL from the Binance API.
- * @returns {Promise<number|null>} The price as a number, or null if it fails.
+ * Fetches BTC/BRL price data from Binance.
+ * @returns {Promise<{currentPrice: number, openPrice: number, variation: number}|null>} An object with prices and variation, or null on failure.
  */
 async function fetchFromBinance() {
   try {
-    const url = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCBRL';
+    const url = 'https://data-api.binance.vision/api/v3/ticker/24hr?symbol=BTCBRL';
     const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Binance API responded with status: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Binance API status: ${response.status}`);
     const data = await response.json();
-    return parseFloat(data.price);
+    return {
+      currentPrice: parseFloat(data.lastPrice),
+      openPrice: parseFloat(data.openPrice),
+      variation: parseFloat(data.priceChangePercent),
+    };
   } catch (error) {
     console.warn('Failed to fetch from Binance API:', error);
     return null;
@@ -20,69 +22,41 @@ async function fetchFromBinance() {
 }
 
 /**
- * Fetches the current BTC price in BRL from the CoinGecko API.
- * @returns {Promise<number|null>} The price as a number, or null if it fails.
+ * Fetches BTC/BRL price data from Bybit.
+ * @returns {Promise<{currentPrice: number, openPrice: number, variation: number}|null>} An object with prices and variation, or null on failure.
  */
-async function fetchFromCoinGecko() {
+async function fetchFromBybit() {
   try {
-    const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl';
+    const url = 'https://api.bybit.com/v5/market/tickers?category=spot&symbol=BTCBRL';
     const response = await fetch(url);
-    if (!response.ok) throw new Error(`CoinGecko API responded with status: ${response.status}`);
+    if (!response.ok) throw new Error(`Bybit API status: ${response.status}`);
     const data = await response.json();
-    return data?.bitcoin?.brl ?? null;
+
+    const ticker = data?.result?.list?.[0];
+    if (!ticker || !ticker.lastPrice || !ticker.prevPrice24h || !ticker.price24hPcnt) {
+      throw new Error('Bybit API response is missing required fields.');
+    }
+
+    return {
+      currentPrice: parseFloat(ticker.lastPrice),
+      openPrice: parseFloat(ticker.prevPrice24h),
+      // Bybit returns a ratio (e.g., 0.025), so we convert it to a percentage.
+      variation: parseFloat(ticker.price24hPcnt) * 100,
+    };
   } catch (error) {
-    console.error('Failed to fetch from CoinGecko API:', error);
+    console.warn('Failed to fetch from Bybit API:', error);
     return null;
   }
 }
 
 /**
- * Fetches the opening price for the current UTC day from Binance.
- * This is used as the reference for the daily price change.
- * @returns {Promise<number|null>} The opening price, or null on failure.
+ * Fetches the latest BTC/BRL price data, using Binance as the primary source and Bybit as a fallback.
+ * @returns {Promise<{currentPrice: number, openPrice: number, variation: number}|null>} An object with prices and variation, or null if all sources fail.
  */
-export async function fetchDailyOpenPrice() {
-  // 1. Try to get the daily open price from Binance (most accurate)
-  try {
-    const url = 'https://api.binance.com/api/v3/klines?symbol=BTCBRL&interval=1d&limit=1';
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Binance kline API status: ${response.status}`);
-    const data = await response.json();
-    const dailyKline = data[0];
-    if (dailyKline) return parseFloat(dailyKline[1]);
-  } catch (error) {
-    console.warn('Failed to fetch daily open from Binance, falling back to CoinGecko.', error);
-  }
+export async function fetchBtcPriceData() {
+  const binanceData = await fetchFromBinance();
+  if (binanceData) return binanceData;
 
-  // 2. If Binance fails, fall back to CoinGecko
-  try {
-    const yesterday = new Date();
-    yesterday.setUTCDate(yesterday.getUTCDate() - 1);
-    const day = String(yesterday.getUTCDate()).padStart(2, '0');
-    const month = String(yesterday.getUTCMonth() + 1).padStart(2, '0');
-    const year = yesterday.getUTCFullYear();
-    const url = `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=${day}-${month}-${year}`;
-
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`CoinGecko history API status: ${response.status}`);
-    const data = await response.json();
-    return data?.market_data?.current_price?.brl ?? null;
-  } catch (error) {
-    console.error('Fallback to CoinGecko for daily open also failed.', error);
-  }
-
-  return null; // Return null if all sources fail
-}
-
-/**
- * Fetches the BTC price, using Binance as the primary source and CoinGecko as a fallback.
- * @returns {Promise<{price: number|null, source: string}>} An object with the price and the source API.
- */
-export async function fetchBtcPrice() {
-  let price = await fetchFromBinance();
-  if (price !== null) return { price, source: 'Binance' };
-
-  console.warn('Binance failed for current price, falling back to CoinGecko.');
-  price = await fetchFromCoinGecko();
-  return { price, source: price !== null ? 'CoinGecko' : 'none' };
+  console.log('Binance failed, trying Bybit as a fallback...');
+  return await fetchFromBybit();
 }
